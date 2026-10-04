@@ -23,7 +23,7 @@ import numpy as np
 import jax
 import jax.numpy as jnp
 
-import pylcp
+import pylcp_jax
 import constants
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
@@ -54,23 +54,23 @@ def s_ramp(R, t):
     frac = jnp.minimum(t / constants.t_ramp, 1.0)
     return constants.s_start + (constants.s_end - constants.s_start) * frac
 
-laserBeams = pylcp.conventional3DMOTBeams(
+laserBeams = pylcp_jax.conventional3DMOTBeams(
     k=constants.kmag, s=s_ramp, delta=0.,
-    beam_type=pylcp.infinitePlaneWaveBeam,
+    beam_type=pylcp_jax.infinitePlaneWaveBeam,
 )
-magField = pylcp.quadrupoleMagneticField(constants.alpha_nat)
+magField = pylcp_jax.quadrupoleMagneticField(constants.alpha_nat)
 
 # Same atomic structure as BB stage: J=0 ground, J=1 excited (3P1, g_J = 3/2)
-H_g, muq_g = pylcp.hamiltonians.singleF(F=0, gF=0.0, muB=constants.muB)
-H_e, muq_e = pylcp.hamiltonians.singleF(F=1, gF=1.5, muB=constants.muB)
-d_q = pylcp.hamiltonians.dqij_two_bare_hyperfine(0, 1)
+H_g, muq_g = pylcp_jax.hamiltonians.singleF(F=0, gF=0.0, muB=constants.muB)
+H_e, muq_e = pylcp_jax.hamiltonians.singleF(F=1, gF=1.5, muB=constants.muB)
+d_q = pylcp_jax.hamiltonians.dqij_two_bare_hyperfine(0, 1)
 
-hamiltonian = pylcp.hamiltonian(
+hamiltonian = pylcp_jax.hamiltonian(
     H_g, -constants.det * np.eye(3) + H_e, muq_g, muq_e, d_q,
     mass=constants.mass, muB=constants.muB, gamma=constants.gamma, k=constants.kmag,
 )
 
-obe = pylcp.obe(laserBeams, magField, hamiltonian, a=constants.a_grav, transform_into_re_im=True)
+obe = pylcp_jax.obe(laserBeams, magField, hamiltonian, a=constants.a_grav, transform_into_re_im=True)
 
 # ---------------------------------------------------------------------------
 # Load atoms from the upstream stage (same transition, no rescale)

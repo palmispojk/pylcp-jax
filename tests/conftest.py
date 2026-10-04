@@ -27,9 +27,9 @@ import pytest
 
 jax.config.update("jax_enable_x64", True)
 
-import pylcp.hamiltonians as hamiltonians
-from pylcp.fields import constantMagneticField, laserBeams
-from pylcp.hamiltonian import hamiltonian
+import pylcp_jax.hamiltonians as hamiltonians
+from pylcp_jax.fields import constantMagneticField, laserBeams
+from pylcp_jax.hamiltonian import hamiltonian
 
 # ---------------------------------------------------------------------------
 # GPU detection

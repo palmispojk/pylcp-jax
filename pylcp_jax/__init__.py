@@ -1,5 +1,5 @@
 """
-pylcp - Python Laser Cooling Physics.
+pylcp_jax - Python Laser Cooling Physics.
 
 A JAX-accelerated simulation package for laser cooling physics, providing tools
 for computing optical Bloch equations, rate equations, and heuristic models of

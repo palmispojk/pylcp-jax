@@ -1,13 +1,13 @@
 """
-Tests for pylcp/heuristiceq.py
+Tests for pylcp_jax/heuristiceq.py
 """
 
 import jax.numpy as jnp
 import numpy as np
 import pytest
 
-from pylcp.fields import constantMagneticField, laserBeams
-from pylcp.heuristiceq import heuristiceq
+from pylcp_jax.fields import constantMagneticField, laserBeams
+from pylcp_jax.heuristiceq import heuristiceq
 
 # ---------------------------------------------------------------------------
 # Local fixtures (shared ones live in conftest.py)
@@ -313,7 +313,7 @@ class Test1DMOTForceProfile:
 
     @pytest.fixture
     def mot_heq(self):
-        from pylcp.fields import magField
+        from pylcp_jax.fields import magField
 
         alpha = 1.0
         beams = laserBeams(

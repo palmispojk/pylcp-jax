@@ -53,7 +53,7 @@ def initialize_from_pickle(pickle_path, obe, dst_constants, src_constants=None,
     ----------
     pickle_path : str or Path
         Upstream stage's final-state pickle: {'r': (N, 3), 'v': (N, 3)}.
-    obe : pylcp.obe or pylcp.rateeq
+    obe : pylcp_jax.obe or pylcp_jax.rateeq
         Governing-equation object for this stage. Its built-in initializers
         (`set_initial_position_and_velocity`, `set_initial_rho_from_rateeq`)
         are used to set up each atom — the loader does not touch the state

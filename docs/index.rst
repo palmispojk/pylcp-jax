@@ -1,16 +1,16 @@
-.. pylcp documentation master file, created by
+.. pylcp-jax documentation master file, created by
    sphinx-quickstart on Thu Sep  3 20:44:00 2020.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pylcp!
-=================
+Welcome to pylcp-jax!
+=====================
 
-`pylcp` is a python package meant to help with the calculation of a variety of
+`pylcp-jax` is a python package meant to help with the calculation of a variety of
 interesting quantities in laser cooling physics.  At its heart, it allows for
 automatic generation of the optical Bloch equations or some approximation
 thereof given a atom or molecule internal Hamiltonian, a set of laser beams, and
-a possible magnetic field. If you find `pylcp` useful in your research, please
+a possible magnetic field. If you find `pylcp-jax` useful in your research, please
 cite our paper describing the package: https://doi.org/10.1016/j.cpc.2021.108166
 
 .. toctree::
@@ -24,7 +24,8 @@ cite our paper describing the package: https://doi.org/10.1016/j.cpc.2021.108166
 Support
 -------
 
-Join our google group: https://groups.google.com/g/pylcp/
+Report bugs and ask questions on the GitHub issue tracker:
+https://github.com/palmispojk/pylcp-jax/issues
 
 Credits
 -------
@@ -46,7 +47,7 @@ Credits
     Computer Physics Communications 270, 108166 (2020).
     https://doi.org/10.1016/j.cpc.2021.108166
 
-:Version: 1.0.0 of 2020/11/10
+:Version: 0.0.1
 
 :Disclaimer:
   The full description of the procedures used in this documentation requires

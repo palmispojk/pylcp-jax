@@ -50,9 +50,9 @@ must have shape :math:`n\times n` and the ground state :math:`\mu_q` must have
 shape :math:`3\times n\times n`.  Likewise for the excited states.  The
 :math:`d_q` matrix must have shape :math:`3\times n \times m`.
 
-We then combine the whole thing together into the pylcp.hamiltonian class::
+We then combine the whole thing together into the pylcp_jax.hamiltonian class::
 
-   hamiltonian = pylcp.hamiltonian(Hg, He, mu_q, mu_q, d_q, mass=mass)
+   hamiltonian = pylcp_jax.hamiltonian(Hg, He, mu_q, mu_q, d_q, mass=mass)
 
 There are a host of functions for returning individual components of this
 block Hamiltonian, documented in :doc:`hamiltonians`.
@@ -62,20 +62,20 @@ Laser beams
 The next components is to define a collection of laser beams.  For example,
 two create two counterpropagating laser beams ::
 
-  laserBeams = pylcp.laserBeams([
+  laserBeams = pylcp_jax.laserBeams([
           {'kvec':np.array([1., 0., 0.]), 'pol':np.array([0., 1., 0.]),
            'pol_coord':'spherical', 'delta':delta, 's':norm_intensity},
           {'kvec':np.array([-1., 0., 0.]), 'pol':np.array([0., 1., 0.]),
            'pol_coord':'spherical', 'delta':delta, 's':norm_intensity}
-          ], beam_type=pylcp.infinitePlaneWaveBeam)
+          ], beam_type=pylcp_jax.infinitePlaneWaveBeam)
 
 Here, we make the laser beam collection by passing a list of dictionaries, each
 dictionary containing the keyword arguments to make individual
-`pylcp.infinitePlaneWaveBeam` beams.  `kvec` specifies the k-vector of the laser,
+`pylcp_jax.infinitePlaneWaveBeam` beams.  `kvec` specifies the k-vector of the laser,
 `pol` specifies its polarization in the coordinate system specified by `pol_coord`,
 `delta` specifies its frequency in the rotating frame (typically the detuning),
 and `beta` specifies is saturation parameter.  The optioanl `beam_type` argument
-specifies the subclass of pylcp.laserBeam to use in constructing the individual
+specifies the subclass of pylcp_jax.laserBeam to use in constructing the individual
 laser beams.  More information can be found in :doc:`laser_fields`.
 
 
@@ -84,7 +84,7 @@ Magnetic field
 The last component that one specifies the magnetic field.  For this example, we
 will create a quadrupole magnetic field ::
 
-  magField = pylcp.quadrupoleMagneticField(alpha)
+  magField = pylcp_jax.quadrupoleMagneticField(alpha)
 
 Here, :math:`\alpha` is the strength of the magnetic field gradient.  There
 are many types of magnetic fields to choose from, documented in
@@ -97,7 +97,7 @@ Governing equation
 Once all the components are created, we can combine them together into a
 govening equation.  In this case, it is an optical Bloch equation ::
 
-  obe = pylcp.obe(laserBeams, magField, hamiltonian)
+  obe = pylcp_jax.obe(laserBeams, magField, hamiltonian)
 
 And once you have your governing equation, you simply calculate the thing of
 interest.  For example, if you wanted to calculate the force at locations :math:`R`

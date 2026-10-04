@@ -20,7 +20,7 @@ from common import (
     N_POINTS, SEED, SWEEP_GPU_ATOMS, SWEEP_T_FACTORS, TRANSITIONS,
     setup_obe, make_y0_list,
 )
-from pylcp.integration_tools_gpu import (
+from pylcp_jax.integration_tools_gpu import (
     optimal_batch_size, _make_run_group, _probe_bytes_per_atom,
 )
 

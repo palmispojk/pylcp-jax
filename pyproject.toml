@@ -1,45 +1,48 @@
 [project]
-name = "pylcp"
-version = "2.0.0"
-description = "A package for calculating laser cooling physics"
+name = "pylcp-jax"
+version = "0.0.1"
+description = "GPU-accelerated laser cooling physics: optical Bloch equations, rate equations and batched Monte Carlo trajectories (JAX)"
 authors = [
-    {name = "Stephen Eckel", email = "pylcp@googlegroups.com"},
-    {name = "Daniel Barker"},
-    {name = "Eric Norrgard"},
-    {name = "Johan Palm", email = "johan.palm2000@gmail.com"}
+    {name = "Johan Palm", email = "johan.palm2000@gmail.com"},
 ]
-
-license = {text = "NIST"}
 readme = "README.md"
-requires-python = ">=3.11, <4.0"
-keywords = ["atomic physics", "laser cooling", "numerical integration"]
+license-files = ["LICENSE"]
+requires-python = ">=3.11, <3.15"  # versions tested in CI
+keywords = ["atomic physics", "laser cooling", "optical Bloch equations", "JAX", "GPU"]
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
-    "License :: Other/Proprietary License",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12"
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Physics",
 ]
 dependencies = [
     "diffrax>=0.7.2,<0.8.0",
     "jax>=0.9.1,<0.10.0",
+    "numpy",
+    "scipy",
+    "sympy>=1.14.0",  # Wigner symbols used by pylcp_jax.hamiltonians
 ]
 
 [project.optional-dependencies]
-cuda = ["jax[cuda12]>=0.9.1,<0.10.0"]
+cuda = ["jax[cuda12]>=0.9.1,<0.10.0"]  # NVIDIA GPU support (CUDA 12)
+gratings = ["numba"]                   # needed only for pylcp_jax.gratings
+plot = ["matplotlib>=3.10.8"]          # needed only for the built-in plotting helpers
 
 [project.urls]
-"Bug Tracker" = "https://github.com/JQIamo/pylcp/issues"
-"Documentation" = "https://python-laser-cooling-physics.readthedocs.io/en/stable"
-"Source Code" = "https://github.com/JQIamo/pylcp/"
-
+Source = "https://github.com/palmispojk/pylcp-jax"
+"Bug Tracker" = "https://github.com/palmispojk/pylcp-jax/issues"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pylcp_jax"]
 
 [dependency-groups]
 dev = [
@@ -79,19 +82,19 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"pylcp/fields.py" = ["E501"]  # long LaTeX math in docstrings
+"pylcp_jax/fields.py" = ["E501"]  # long LaTeX math in docstrings
 "tests/**" = ["D"]  # no docstring requirements for tests
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
 
 [tool.pyright]
-include = ["pylcp"]
+include = ["pylcp_jax"]
 typeCheckingMode = "basic"
 reportMissingImports = "warning"
 
 [tool.pytest.ini_options]
-addopts = "--cov=pylcp --cov-report=term-missing --cov-fail-under=60"
+addopts = "--cov=pylcp_jax --cov-report=term-missing --cov-fail-under=60"
 markers = [
     "slow: marks tests that take more than a few seconds (deselect with '-m \"not slow\"')",
     "gpu: marks tests that require a CUDA GPU",

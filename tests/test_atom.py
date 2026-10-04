@@ -1,5 +1,5 @@
 """
-Tests for pylcp/atom.py
+Tests for pylcp_jax/atom.py
 """
 
 import numpy as np
@@ -7,7 +7,7 @@ import pytest
 import scipy.constants as cts
 from numpy import pi
 
-from pylcp.atom import atom, state, transition
+from pylcp_jax.atom import atom, state, transition
 
 # ---------------------------------------------------------------------------
 # state

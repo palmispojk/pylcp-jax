@@ -1,6 +1,6 @@
 import numpy as np
-import pylcp
-from pylcp.gratings import (infiniteGratingMOTBeams, maskedGaussianGratingMOTBeams)
+import pylcp_jax
+from pylcp_jax.gratings import (infiniteGratingMOTBeams, maskedGaussianGratingMOTBeams)
 import datetime, time
 import dill
 

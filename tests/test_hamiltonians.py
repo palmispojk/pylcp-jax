@@ -1,5 +1,5 @@
 """
-Tests for pylcp/hamiltonians/__init__.py and pylcp/hamiltonians/XFmolecules.py
+Tests for pylcp_jax/hamiltonians/__init__.py and pylcp_jax/hamiltonians/XFmolecules.py
 """
 
 import jax.numpy as jnp
@@ -7,10 +7,10 @@ import numpy as np
 import pytest
 import scipy.constants as cts
 
-import pylcp.hamiltonians as ham
-from pylcp.atom import atom
-from pylcp.common import cart2spherical, spherical2cart
-from pylcp.hamiltonians import XFmolecules
+import pylcp_jax.hamiltonians as ham
+from pylcp_jax.atom import atom
+from pylcp_jax.common import cart2spherical, spherical2cart
+from pylcp_jax.hamiltonians import XFmolecules
 
 # ---------------------------------------------------------------------------
 # Shared helpers
@@ -757,7 +757,7 @@ def diagonalize_hamiltonian(B_arr, H0, mu_q, Bhat=np.array([0.0, 0.0, 1.0])):
 class TestSpinInMagneticField:
     """Spherical tensor algebra vs Pauli matrices for spin-1/2.
 
-    pylcp constructs magnetic moment operators μ_q in the spherical tensor
+    pylcp_jax constructs magnetic moment operators μ_q in the spherical tensor
     basis (q = −1, 0, +1), which is natural for coupling to spherical
     polarization components but less intuitive than the standard Pauli
     matrix formulation (σ_x, σ_y, σ_z).
@@ -939,7 +939,7 @@ class TestBreitRabiValidation:
     """Hyperfine structure: Hamiltonian vs analytical Breit-Rabi formula.
 
     For a J=1/2 ground state (e.g. alkali atoms), the Breit-Rabi formula
-    gives exact eigenvalues of the hyperfine + Zeeman Hamiltonian.  pylcp
+    gives exact eigenvalues of the hyperfine + Zeeman Hamiltonian.  pylcp_jax
     constructs this Hamiltonian numerically in either the coupled |F,mF⟩
     or uncoupled |mJ,mI⟩ basis.
 
@@ -1043,7 +1043,7 @@ class TestBreitRabiValidation:
         """Results in real units (Hz) and natural units (Γ) must agree
         after proper scaling.
 
-        pylcp supports working in "natural" units where energies are
+        pylcp_jax supports working in "natural" units where energies are
         measured in units of the excited-state linewidth Γ (gammaHz).
         Scaling Ahfs → Ahfs/Γ, μB → 1, and B → (μB/Γ)·B must produce
         eigenvalues that, when multiplied by Γ, match the Hz result."""

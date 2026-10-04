@@ -1,5 +1,5 @@
 """
-Tests for pylcp/integration_tools_gpu.py
+Tests for pylcp_jax/integration_tools_gpu.py
 
 Covers RandomOdeResult, solve_ivp_dense, and solve_ivp_random.
 
@@ -20,11 +20,11 @@ import numpy as np
 import pytest
 from conftest import HAS_GPU, requires_gpu
 
-from pylcp.integration_tools_gpu import (
+from pylcp_jax.integration_tools_gpu import (
     RandomOdeResult,
     solve_ivp_dense,
 )
-from pylcp.integration_tools_gpu import (
+from pylcp_jax.integration_tools_gpu import (
     solve_ivp_random as _solve_ivp_random,
 )
 

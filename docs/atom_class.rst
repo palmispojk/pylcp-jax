@@ -13,7 +13,7 @@ laser cooling.  Data comes from `Daniel Steck's "Alkali D-line data"
 Overview
 --------
 
-.. currentmodule:: pylcp
+.. currentmodule:: pylcp_jax
 
 .. autosummary::
 
@@ -23,13 +23,13 @@ Overview
 Detailed functions
 ------------------
 
-.. autoclass:: pylcp.atom
+.. autoclass:: pylcp_jax.atom
   :members:
 
-.. currentmodule:: pylcp.atom
+.. currentmodule:: pylcp_jax.atom
 
-.. autoclass:: pylcp.atom.state
+.. autoclass:: pylcp_jax.atom.state
   :members:
 
-.. autoclass:: pylcp.atom.transition
+.. autoclass:: pylcp_jax.atom.transition
   :members:

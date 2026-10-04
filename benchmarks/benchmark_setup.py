@@ -7,30 +7,30 @@ which is the setup loop in generate_force_profile.
 import time
 import numpy as np
 import scipy.constants as cts
-import pylcp
+import pylcp_jax
 
 # ── Build the F2→F3 problem (same as the molasses notebook) ────────────────
-atom = pylcp.atom('23Na')
+atom = pylcp_jax.atom('23Na')
 mass = (atom.state[2].gamma * atom.mass) / (cts.hbar * (100 * 2 * np.pi * atom.transition[1].k) ** 2)
 
 det = -2.5
 s = 1.0
 
-Hg, Bgq = pylcp.hamiltonians.singleF(F=2, gF=0, muB=1)
-He, Beq = pylcp.hamiltonians.singleF(F=3, gF=1/3, muB=1)
-dijq = pylcp.hamiltonians.dqij_two_bare_hyperfine(2, 3)
-hamiltonian = pylcp.hamiltonian(Hg, -det * np.eye(He.shape[0]) + He, Bgq, Beq, dijq, mass=mass)
+Hg, Bgq = pylcp_jax.hamiltonians.singleF(F=2, gF=0, muB=1)
+He, Beq = pylcp_jax.hamiltonians.singleF(F=3, gF=1/3, muB=1)
+dijq = pylcp_jax.hamiltonians.dqij_two_bare_hyperfine(2, 3)
+hamiltonian = pylcp_jax.hamiltonian(Hg, -det * np.eye(He.shape[0]) + He, Bgq, Beq, dijq, mass=mass)
 
-laserBeams = pylcp.laserBeams([
+laserBeams = pylcp_jax.laserBeams([
     {'kvec': np.array([0., 0., 1.]), 'pol': np.array([0., 0., 1.]),
      'pol_coord': 'spherical', 'delta': 0., 's': s},
     {'kvec': np.array([0., 0., -1.]), 'pol': np.array([1., 0., 0.]),
      'pol_coord': 'spherical', 'delta': 0., 's': s},
-], beam_type=pylcp.infinitePlaneWaveBeam)
+], beam_type=pylcp_jax.infinitePlaneWaveBeam)
 
-magField = pylcp.constantMagneticField(np.array([0., 0., 0.]))
+magField = pylcp_jax.constantMagneticField(np.array([0., 0., 0.]))
 
-o = pylcp.obe(laserBeams, magField, hamiltonian,
+o = pylcp_jax.obe(laserBeams, magField, hamiltonian,
               include_mag_forces=False, transform_into_re_im=True)
 
 # ── Velocity grid (same size as notebook figure 6: 21 points) ──────────────

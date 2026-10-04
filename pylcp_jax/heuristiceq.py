@@ -29,10 +29,10 @@ class heuristiceq(governingeq):
 
     Parameters
     ----------
-    laserBeams : dictionary of pylcp.laserBeams, pylcp.laserBeams, or list of pylcp.laserBeam
+    laserBeams : dictionary of pylcp_jax.laserBeams, pylcp_jax.laserBeams, or list of pylcp_jax.laserBeam
         The laserBeams that will be used in constructing the heuristic
         equations.  Must contain only a single key of ``'g->e'``.
-    magField : pylcp.magField or callable
+    magField : pylcp_jax.magField or callable
         The function or object that defines the magnetic field.
     a : array_like, shape (3,), optional
         Constant acceleration (e.g. gravity). Default: [0., 0., 0.]
@@ -374,7 +374,7 @@ class heuristiceq(governingeq):
 
         Returns
         -------
-        profile : pylcp.common.base_force_profile
+        profile : pylcp_jax.common.base_force_profile
             Resulting force profile.
         """
         if not name:

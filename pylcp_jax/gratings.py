@@ -1,7 +1,7 @@
 import numba
 import numpy as np
 
-from pylcp.fields import clippedGaussianBeam, infinitePlaneWaveBeam, laserBeams
+from pylcp_jax.fields import clippedGaussianBeam, infinitePlaneWaveBeam, laserBeams
 
 
 @numba.njit

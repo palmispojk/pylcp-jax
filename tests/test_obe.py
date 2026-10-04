@@ -1,5 +1,5 @@
 """
-Tests for pylcp/obe.py
+Tests for pylcp_jax/obe.py
 """
 
 import jax
@@ -8,15 +8,15 @@ import numpy as np
 import pytest
 from conftest import make_ham, requires_gpu
 
-import pylcp.hamiltonians as hamiltonians
-from pylcp.fields import (
+import pylcp_jax.hamiltonians as hamiltonians
+from pylcp_jax.fields import (
     constantMagneticField,
     infinitePlaneWaveBeam,
     laserBeams,
     magField,
 )
-from pylcp.hamiltonian import hamiltonian
-from pylcp.obe import force_profile, obe
+from pylcp_jax.hamiltonian import hamiltonian
+from pylcp_jax.obe import force_profile, obe
 
 # ---------------------------------------------------------------------------
 # Module-scoped fixture overrides (OBE construction is expensive)
@@ -765,7 +765,7 @@ class TestFullOBEEv:
 
     def test_full_OBE_ev_with_B(self, obe_transform, ham):
         """full_OBE_ev should run without error when B field is non-zero."""
-        from pylcp.fields import constantMagneticField
+        from pylcp_jax.fields import constantMagneticField
 
         single_beam = laserBeams([{"kvec": [0.0, 0.0, 1.0], "pol": +1, "s": 0.1, "delta": 0.0}])
         B_field = constantMagneticField(jnp.array([0.0, 0.0, 0.1]))
@@ -792,7 +792,7 @@ class Test1DMOTForceProfile:
 
     @pytest.fixture
     def mot_obe(self):
-        from pylcp.fields import magField
+        from pylcp_jax.fields import magField
 
         ham = make_ham(gamma=1.0, k=1.0, mass=1.0)
         mu_val = 1399624.49171  # |diag(mu_e[1])[0]|
@@ -1532,8 +1532,8 @@ class TestQuadrupoleTrapOBE:
     @pytest.fixture(scope="class")
     def trap_setup(self):
         """Build an OBE solver for a spin-1/2 atom in a linear magnetic field."""
-        import pylcp.hamiltonians as hamiltonians
-        from pylcp.hamiltonian import hamiltonian as ham_cls
+        import pylcp_jax.hamiltonians as hamiltonians
+        from pylcp_jax.hamiltonian import hamiltonian as ham_cls
 
         H0, muq = hamiltonians.singleF(1 / 2, gF=1, muB=1)
         h = ham_cls()
@@ -1816,7 +1816,7 @@ class TestQuadrupoleTrapOBEGPU:
 
     @pytest.fixture(scope="class")
     def trap_setup(self):
-        from pylcp.hamiltonian import hamiltonian as ham_cls
+        from pylcp_jax.hamiltonian import hamiltonian as ham_cls
 
         H0, muq = hamiltonians.singleF(1 / 2, gF=1, muB=1)
         h = ham_cls()
@@ -2473,7 +2473,7 @@ class TestCPUvsGPUQuadrupoleTrap:
 
     @pytest.fixture(scope="class")
     def trap_setup(self):
-        from pylcp.hamiltonian import hamiltonian as ham_cls
+        from pylcp_jax.hamiltonian import hamiltonian as ham_cls
 
         H0, muq = hamiltonians.singleF(1 / 2, gF=1, muB=1)
         h = ham_cls()

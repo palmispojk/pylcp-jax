@@ -28,8 +28,8 @@ import jax.numpy as jnp
 import numpy as np
 import pytest
 
-import pylcp.integration_tools_gpu as itg
-from pylcp.integration_tools_gpu import (
+import pylcp_jax.integration_tools_gpu as itg
+from pylcp_jax.integration_tools_gpu import (
     _gpu_devices,
     _shard_batch,
     solve_ivp_dense,

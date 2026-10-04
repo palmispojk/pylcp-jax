@@ -1,8 +1,8 @@
 import jax.numpy as jnp
 import pytest
 
-import pylcp.hamiltonians as hamiltonians
-from pylcp.hamiltonian import hamiltonian
+import pylcp_jax.hamiltonians as hamiltonians
+from pylcp_jax.hamiltonian import hamiltonian
 
 # ---------------------------------------------------------------------------
 # Helpers

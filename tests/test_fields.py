@@ -3,7 +3,7 @@ import jax.numpy as jnp
 import numpy as np
 import pytest
 
-from pylcp.fields import (
+from pylcp_jax.fields import (
     clippedGaussianBeam,
     constantMagneticField,
     conventional3DMOTBeams,

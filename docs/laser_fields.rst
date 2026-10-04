@@ -6,7 +6,7 @@ Objects for creating laser beam objects, along with some common components.
 Overview
 --------
 
-.. currentmodule:: pylcp
+.. currentmodule:: pylcp_jax
 
 .. autosummary::
 
@@ -21,20 +21,20 @@ Overview
 Details
 -------
 
-  .. autoclass:: pylcp.laserBeam
+  .. autoclass:: pylcp_jax.laserBeam
     :members:
 
-  .. autoclass:: pylcp.infinitePlaneWaveBeam
+  .. autoclass:: pylcp_jax.infinitePlaneWaveBeam
     :members:
 
-  .. autoclass:: pylcp.gaussianBeam
+  .. autoclass:: pylcp_jax.gaussianBeam
     :members:
 
-  .. autoclass:: pylcp.clippedGaussianBeam
+  .. autoclass:: pylcp_jax.clippedGaussianBeam
     :members:
 
-  .. autoclass:: pylcp.laserBeams
+  .. autoclass:: pylcp_jax.laserBeams
     :members:
 
-  .. autoclass:: pylcp.conventional3DMOTBeams
+  .. autoclass:: pylcp_jax.conventional3DMOTBeams
     :members:

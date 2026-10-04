@@ -4,36 +4,34 @@ Installation instructions
 Prerequisites
 -------------
 
-``pylcp`` requires Python >= 3.11.
-
-As of v2.0, ``pylcp`` uses `JAX <https://github.com/jax-ml/jax>`_ and
+``pylcp-jax`` requires Python >= 3.11 (tested on 3.11 to 3.14). It uses
+`JAX <https://github.com/jax-ml/jax>`_ and
 `Diffrax <https://github.com/patrick-kidger/diffrax>`_ as its numerical backend.
+The package is installed as ``pylcp-jax`` and imported as ``pylcp_jax``.
 
-Stable release (v1.x)
-----------------------
+Install from PyPI
+-----------------
 
-The stable release is available on PyPI::
+::
 
-  pip install pylcp
+  pip install pylcp-jax
 
-.. note::
+``pylcp-jax`` is a separate package from the original ``pylcp``; it does not
+replace or conflict with it.
 
-   The PyPI version (1.x) still uses the original scipy backend. v2.0 has not
-   yet been released on PyPI.
-
-Development version (v2.0, JAX backend)
----------------------------------------
+Install from source
+-------------------
 
 Using `uv <https://docs.astral.sh/uv/>`_ (recommended)::
 
-  git clone https://github.com/palmispojk/pylcp/
-  cd pylcp
+  git clone https://github.com/palmispojk/pylcp-jax/
+  cd pylcp-jax
   uv sync
 
 Or using pip::
 
-  git clone https://github.com/palmispojk/pylcp/
-  cd pylcp
+  git clone https://github.com/palmispojk/pylcp-jax/
+  cd pylcp-jax
   pip install .
 
 GPU support
@@ -47,7 +45,9 @@ Using uv::
 
 Using pip::
 
-  pip install ".[cuda]"
+  pip install "pylcp-jax[cuda]"
+
+or, from a source checkout, ``pip install ".[cuda]"``.
 
 This installs JAX with CUDA 12 support. GPU tests in the test suite are
 automatically skipped when no GPU is detected.
@@ -63,5 +63,5 @@ Run the test suite with::
 
   uv run pytest
 
-See `CONTRIBUTING.md <https://github.com/JQIamo/pylcp/blob/master/CONTRIBUTING.md>`_
+See `CONTRIBUTING.md <https://github.com/palmispojk/pylcp-jax/blob/master/CONTRIBUTING.md>`_
 for code style and linting instructions.

@@ -6,7 +6,7 @@ Objects for creating magnetic field objects, along with some common components.
 Overview
 --------
 
-.. currentmodule:: pylcp
+.. currentmodule:: pylcp_jax
 
 .. autosummary::
 
@@ -18,14 +18,14 @@ Overview
 Details
 -------
 
-  .. autoclass:: pylcp.magField
+  .. autoclass:: pylcp_jax.magField
     :members:
 
-  .. autoclass:: pylcp.constantMagneticField
+  .. autoclass:: pylcp_jax.constantMagneticField
     :members:
 
-  .. autoclass:: pylcp.quadrupoleMagneticField
+  .. autoclass:: pylcp_jax.quadrupoleMagneticField
     :members:
 
-  .. autoclass:: pylcp.iPMagneticField
+  .. autoclass:: pylcp_jax.iPMagneticField
     :members:

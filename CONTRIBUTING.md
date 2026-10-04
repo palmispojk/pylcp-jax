@@ -1,4 +1,4 @@
-# Contributing to pylcp
+# Contributing to pylcp_jax
 
 ## Setup
 
@@ -15,13 +15,13 @@ This project uses [ruff](https://docs.astral.sh/ruff/) for linting and formattin
 ### Linting
 
 ```bash
-uv run ruff check pylcp
+uv run ruff check pylcp_jax
 ```
 
 ### Formatting
 
 ```bash
-uv run ruff format pylcp
+uv run ruff format pylcp_jax
 ```
 
 All code should be formatted with `ruff format` before committing. The formatter uses a line length of 100 (configured in `pyproject.toml`).
@@ -32,7 +32,7 @@ All code should be formatted with `ruff format` before committing. The formatter
 uv run pyright
 ```
 
-Pyright is configured in basic mode and checks the `pylcp/` directory. The `gratings` module is excluded from type checking due to an optional `numba` dependency.
+Pyright is configured in basic mode and checks the `pylcp_jax/` directory. The `gratings` module is excluded from type checking due to an optional `numba` dependency.
 
 ## Running tests
 

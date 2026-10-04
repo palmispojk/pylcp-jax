@@ -2,7 +2,7 @@
 Green MOT simulation for Sr88 (F=2 -> F'=3) using GPU-batched OBE solver.
 
 Rewritten from neutral_atoms_sim/MOT_sims/single_atom_sim.py to use the
-new JAX/GPU-accelerated pylcp API with batched evolve_motion.
+new JAX/GPU-accelerated pylcp_jax API with batched evolve_motion.
 """
 import os
 
@@ -16,7 +16,7 @@ import jax
 import jax.numpy as jnp
 import pickle
 
-import pylcp
+import pylcp_jax
 import constants
 
 # ---------------------------------------------------------------------------
@@ -25,20 +25,20 @@ import constants
 print(f"Starting to build the setup.")
 trap_time = time.monotonic()
 
-laserBeams = pylcp.conventional3DMOTBeams(
-    k=constants.kmag, s=constants.s, delta=0., beam_type=pylcp.infinitePlaneWaveBeam
+laserBeams = pylcp_jax.conventional3DMOTBeams(
+    k=constants.kmag, s=constants.s, delta=0., beam_type=pylcp_jax.infinitePlaneWaveBeam
 )
-magField = pylcp.quadrupoleMagneticField(constants.alpha)
+magField = pylcp_jax.quadrupoleMagneticField(constants.alpha)
 
-H_g, muq_g = pylcp.hamiltonians.singleF(F=2, gF=1.5, muB=constants.muB)
-H_e, muq_e = pylcp.hamiltonians.singleF(F=3, gF=1 + 1 / 3, muB=constants.muB)
-d_q = pylcp.hamiltonians.dqij_two_bare_hyperfine(2, 3)
-hamiltonian = pylcp.hamiltonian(
+H_g, muq_g = pylcp_jax.hamiltonians.singleF(F=2, gF=1.5, muB=constants.muB)
+H_e, muq_e = pylcp_jax.hamiltonians.singleF(F=3, gF=1 + 1 / 3, muB=constants.muB)
+d_q = pylcp_jax.hamiltonians.dqij_two_bare_hyperfine(2, 3)
+hamiltonian = pylcp_jax.hamiltonian(
     H_g, -constants.det * np.eye(7) + H_e, muq_g, muq_e, d_q,
     mass=constants.mass, muB=constants.muB, gamma=constants.gamma, k=constants.kmag
 )
 
-obe = pylcp.obe(laserBeams, magField, hamiltonian, a=constants.a_grav, transform_into_re_im=True)
+obe = pylcp_jax.obe(laserBeams, magField, hamiltonian, a=constants.a_grav, transform_into_re_im=True)
 
 # ---------------------------------------------------------------------------
 # Build batched initial conditions

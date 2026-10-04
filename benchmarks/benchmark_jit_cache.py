@@ -11,7 +11,7 @@ import time
 import numpy as np
 import jax
 import jax.numpy as jnp
-import pylcp
+import pylcp_jax
 
 
 def setup_obe():
@@ -20,17 +20,17 @@ def setup_obe():
     S = 1.25
     ALPHA = 1e-4
 
-    Hg, Bgq = pylcp.hamiltonians.singleF(F=0, gF=0, muB=1)
-    He, Beq = pylcp.hamiltonians.singleF(F=1, gF=1, muB=1)
-    dijq = pylcp.hamiltonians.dqij_two_bare_hyperfine(0, 1)
-    hamiltonian = pylcp.hamiltonian(
+    Hg, Bgq = pylcp_jax.hamiltonians.singleF(F=0, gF=0, muB=1)
+    He, Beq = pylcp_jax.hamiltonians.singleF(F=1, gF=1, muB=1)
+    dijq = pylcp_jax.hamiltonians.dqij_two_bare_hyperfine(0, 1)
+    hamiltonian = pylcp_jax.hamiltonian(
         Hg, -DET * np.eye(3) + He, Bgq, Beq, dijq, mass=100
     )
-    laserBeams = pylcp.conventional3DMOTBeams(
-        s=S, delta=0., beam_type=pylcp.infinitePlaneWaveBeam
+    laserBeams = pylcp_jax.conventional3DMOTBeams(
+        s=S, delta=0., beam_type=pylcp_jax.infinitePlaneWaveBeam
     )
-    magField = pylcp.quadrupoleMagneticField(ALPHA)
-    return pylcp.obe(laserBeams, magField, hamiltonian, transform_into_re_im=True)
+    magField = pylcp_jax.quadrupoleMagneticField(ALPHA)
+    return pylcp_jax.obe(laserBeams, magField, hamiltonian, transform_into_re_im=True)
 
 
 def make_batch(obe, n_atoms, seed=42):

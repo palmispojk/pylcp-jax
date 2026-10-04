@@ -23,7 +23,7 @@ specialized Hamiltonians for other quantum systems like molecules.
 Overview
 --------
 
-.. currentmodule:: pylcp.hamiltonians
+.. currentmodule:: pylcp_jax.hamiltonians
 
 .. autosummary::
 
@@ -39,5 +39,5 @@ Overview
 Detailed functions
 ------------------
 
-.. automodule:: pylcp.hamiltonians
+.. automodule:: pylcp_jax.hamiltonians
   :members:

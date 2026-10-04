@@ -23,10 +23,10 @@ jobs:
         run: uv sync --group dev
 
       - name: Ruff check
-        run: uv run ruff check pylcp/ tests/ --exclude pylcp/gratings.py
+        run: uv run ruff check pylcp_jax/ tests/ --exclude pylcp_jax/gratings.py
 
       - name: Ruff format check
-        run: uv run ruff format --check pylcp/ tests/ --exclude pylcp/gratings.py
+        run: uv run ruff format --check pylcp_jax/ tests/ --exclude pylcp_jax/gratings.py
 
       - name: Pyright
         run: uv run pyright

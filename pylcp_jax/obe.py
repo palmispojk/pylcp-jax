@@ -52,12 +52,12 @@ class force_profile(base_force_profile):
         The forces due to each laser, indexed by the
         manifold the laser addresses.  The dictionary is keyed by the transition
         driven, and individual lasers are in the same order as in the
-        pylcp.laserBeams object used to create the governing equation.
+        pylcp_jax.laserBeams object used to create the governing equation.
     f_q : dictionary of array_like
         The force due to each laser and its :math:`q` component, indexed by the
         manifold the laser addresses.  The dictionary is keyed by the transition
         driven, and individual lasers are in the same order as in the
-        pylcp.laserBeams object used to create the governing equation.
+        pylcp_jax.laserBeams object used to create the governing equation.
     Neq : array_like
         Equilibrium population found.
     """
@@ -108,23 +108,23 @@ class obe(governingeq):
 
     Parameters
     ----------
-    laserBeams : dictionary of pylcp.laserBeams, pylcp.laserBeams, or list of pylcp.laserBeam
+    laserBeams : dictionary of pylcp_jax.laserBeams, pylcp_jax.laserBeams, or list of pylcp_jax.laserBeam
         The laserBeams that will be used in constructing the optical Bloch
         equations, addressing transitions in the block diagonal hamiltonian.  It can
         be any of the following:
 
-            * A dictionary of pylcp.laserBeams: if this is the case, the keys of
+            * A dictionary of pylcp_jax.laserBeams: if this is the case, the keys of
               the dictionary should match available :math:`d^{nm}` matrices
-              in the pylcp.hamiltonian object.  The key structure should be
+              in the pylcp_jax.hamiltonian object.  The key structure should be
               `n->m`.
-            * pylcp.laserBeams: a single set of laser beams is assumed to
+            * pylcp_jax.laserBeams: a single set of laser beams is assumed to
               address the transition `g->e`.
-            * a list of pylcp.laserBeam: automatically promoted to a
-              pylcp.laserBeams object assumed to address the transition `g->e`.
+            * a list of pylcp_jax.laserBeam: automatically promoted to a
+              pylcp_jax.laserBeams object assumed to address the transition `g->e`.
 
-    magField : pylcp.magField or callable
+    magField : pylcp_jax.magField or callable
         The function or object that defines the magnetic field.
-    hamiltonian : pylcp.hamiltonian
+    hamiltonian : pylcp_jax.hamiltonian
         The internal hamiltonian of the particle.
     a : array_like, shape (3,), optional
         A default acceleration to apply to the particle's motion, usually
@@ -214,7 +214,7 @@ class obe(governingeq):
 
         Parameters
         ----------
-        hamiltonian : pylcp.hamiltonian
+        hamiltonian : pylcp_jax.hamiltonian
             A new hamiltonian whose H_0 block will be used.
         """
         hamiltonian.make_full_matrices()
@@ -574,7 +574,7 @@ class obe(governingeq):
         r"""
         Set the diagonal elements of the initial :math:`\\rho` matrix.
 
-        Uses the equilibrium populations as determined by pylcp.rateeq.
+        Uses the equilibrium populations as determined by pylcp_jax.rateeq.
         """
         if not hasattr(self, "rateeq"):
             self.rateeq = rateeq(self.laserBeams, self.magField, self.hamiltonian)
@@ -1430,7 +1430,7 @@ class obe(governingeq):
 
         Returns
         -------
-        profile : pylcp.obe.force_profile
+        profile : pylcp_jax.obe.force_profile
             Resulting force profile containing the equilibrium forces, detailed laser/mag
             forces, and equilibrium populations for the specified grid.
         """

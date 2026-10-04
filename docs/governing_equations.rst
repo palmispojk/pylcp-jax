@@ -6,7 +6,7 @@ The classes here correspond to the three governing equations.
 Overview
 --------
 
-.. currentmodule:: pylcp
+.. currentmodule:: pylcp_jax
 
 .. autosummary::
 
@@ -18,23 +18,23 @@ Overview
 Details
 -------
 
-.. autoclass:: pylcp.governingeq.governingeq
+.. autoclass:: pylcp_jax.governingeq.governingeq
   :members:
 
-.. autoclass:: pylcp.heuristiceq
+.. autoclass:: pylcp_jax.heuristiceq
   :members:
 
-.. autoclass:: pylcp.common.base_force_profile
+.. autoclass:: pylcp_jax.common.base_force_profile
   :members:
 
-.. autoclass:: pylcp.rateeq
+.. autoclass:: pylcp_jax.rateeq
   :members:
 
-.. autoclass:: pylcp.rateeq.force_profile
+.. autoclass:: pylcp_jax.rateeq.force_profile
   :members:
 
-.. autoclass:: pylcp.obe
+.. autoclass:: pylcp_jax.obe
   :members:
 
-.. autoclass:: pylcp.obe.force_profile
+.. autoclass:: pylcp_jax.obe.force_profile
   :members:

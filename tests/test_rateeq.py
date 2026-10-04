@@ -1,5 +1,5 @@
 """
-Tests for pylcp/rateeq.py
+Tests for pylcp_jax/rateeq.py
 """
 
 import jax
@@ -8,9 +8,9 @@ import numpy as np
 import pytest
 from conftest import make_ham
 
-from pylcp.fields import laserBeams, magField
-from pylcp.hamiltonian import hamiltonian
-from pylcp.rateeq import force_profile, rateeq
+from pylcp_jax.fields import laserBeams, magField
+from pylcp_jax.hamiltonian import hamiltonian
+from pylcp_jax.rateeq import force_profile, rateeq
 
 # ---------------------------------------------------------------------------
 # Local fixtures (shared ones live in conftest.py)
@@ -305,7 +305,7 @@ class Test1DMOTForceProfile:
         Uses alpha scaled so that the Zeeman shift matches the detuning
         at x = ±x_res, i.e.  alpha * x_res * mu_z_per_state = |delta|.
         """
-        from pylcp.fields import magField
+        from pylcp_jax.fields import magField
 
         ham = make_ham(gamma=1.0, k=1.0, mass=1.0)
         # mu_z per excited mF state (physical units)
@@ -438,8 +438,8 @@ class TestQuadrupoleTrapMotion:
     @pytest.fixture(scope="class")
     def trap_rateeq(self):
         """Build a rate equation solver for a spin-1/2 atom in a quadrupole trap."""
-        import pylcp.hamiltonians as hamiltonians
-        from pylcp.hamiltonian import hamiltonian as ham_cls
+        import pylcp_jax.hamiltonians as hamiltonians
+        from pylcp_jax.hamiltonian import hamiltonian as ham_cls
 
         H0, muq = hamiltonians.singleF(1 / 2, gF=2, muB=1)
         h = ham_cls()

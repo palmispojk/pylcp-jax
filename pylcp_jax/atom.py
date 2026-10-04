@@ -106,9 +106,9 @@ class transition:
 
     Parameters
     ----------
-        state1 : pylcp.atom.state
+        state1 : pylcp_jax.atom.state
             The lower state of the transition.
-        state2 : pylcp.atom.state
+        state2 : pylcp_jax.atom.state
             The upper state of the transition.
         mass : float
             Mass of the atom in kg
@@ -180,10 +180,10 @@ class atom:
             magneton.
         mass : float
             Mass, in kg, of the atom.
-        states : list of pylcp.atom.state
+        states : list of pylcp_jax.atom.state
             States of the atom useful for laser cooling, in order of increasing
             energy.
-        transitions : list of pylcp.atom.transition
+        transitions : list of pylcp_jax.atom.transition
             Transitions in the atom useful for laser cooling.  All transitions
             are from the ground state.
     """

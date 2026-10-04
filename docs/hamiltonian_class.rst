@@ -7,7 +7,7 @@ a complete Hamiltonian.
 Overview
 --------
 
-.. currentmodule:: pylcp
+.. currentmodule:: pylcp_jax
 
 .. autosummary::
 
@@ -17,5 +17,5 @@ Overview
 Detailed functions
 ------------------
 
-.. autoclass:: pylcp.hamiltonian
+.. autoclass:: pylcp_jax.hamiltonian
   :members:

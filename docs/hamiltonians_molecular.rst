@@ -11,7 +11,7 @@ and nuclear magneton values must be overridden.
 Overview
 --------
 
-.. currentmodule:: pylcp.hamiltonians.XFmolecules
+.. currentmodule:: pylcp_jax.hamiltonians.XFmolecules
 
 .. autosummary::
 
@@ -23,5 +23,5 @@ Overview
 Detailed functions
 ------------------
 
-.. automodule:: pylcp.hamiltonians.XFmolecules
+.. automodule:: pylcp_jax.hamiltonians.XFmolecules
   :members:

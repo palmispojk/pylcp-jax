@@ -32,8 +32,8 @@ class hamiltonian:
     Hamiltonian in this way.
 
     For other constructions with more than two manifolds, one should construct
-    the Hamiltonian using the `pylcp.hamiltonian.add_H_0_block()`,
-    `pylcp.hamiltonian.add_mu_q_block()` and `pylcp.hamiltonian.add_d_q_block()`.
+    the Hamiltonian using the `pylcp_jax.hamiltonian.add_H_0_block()`,
+    `pylcp_jax.hamiltonian.add_mu_q_block()` and `pylcp_jax.hamiltonian.add_d_q_block()`.
     Note that the order in which the diagonal blocks are added is the energy
     ordering of the manifolds, which is often obscured after the rotating
     wave approximation is taken (and implicitly assumed to be taken before
@@ -555,7 +555,7 @@ class hamiltonian:
 
         Returns
         -------
-        H : pylcp.hamiltonian
+        H : pylcp_jax.hamiltonian
             A block-structured Hamiltonian with diagonal elements diagonalized
             and :math:`d_q` objects rotated into the new eigenbasis.
         """

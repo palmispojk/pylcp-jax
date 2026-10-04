@@ -1,5 +1,5 @@
 """
-Tests for pylcp/common.py
+Tests for pylcp_jax/common.py
 """
 
 import jax
@@ -7,7 +7,7 @@ import jax.numpy as jnp
 import numpy as np
 import pytest
 
-from pylcp.common import (
+from pylcp_jax.common import (
     base_force_profile,
     cart2spherical,
     progressBar,

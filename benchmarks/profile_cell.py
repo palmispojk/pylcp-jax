@@ -2,25 +2,25 @@
 import time
 import numpy as np
 import scipy.constants as cts
-import pylcp
+import pylcp_jax
 
-atom = pylcp.atom('23Na')
+atom = pylcp_jax.atom('23Na')
 mass = (atom.state[2].gamma * atom.mass) / (cts.hbar * (100 * 2 * np.pi * atom.transition[1].k) ** 2)
 
 def return_hamiltonian(Fl, Delta):
-    Hg, Bgq = pylcp.hamiltonians.singleF(F=Fl, gF=0, muB=1)
-    He, Beq = pylcp.hamiltonians.singleF(F=Fl+1, gF=1/(Fl+1), muB=1)
-    dijq = pylcp.hamiltonians.dqij_two_bare_hyperfine(Fl, Fl+1)
-    return pylcp.hamiltonian(Hg, -Delta*np.eye(He.shape[0])+He, Bgq, Beq, dijq, mass=mass)
+    Hg, Bgq = pylcp_jax.hamiltonians.singleF(F=Fl, gF=0, muB=1)
+    He, Beq = pylcp_jax.hamiltonians.singleF(F=Fl+1, gF=1/(Fl+1), muB=1)
+    dijq = pylcp_jax.hamiltonians.dqij_two_bare_hyperfine(Fl, Fl+1)
+    return pylcp_jax.hamiltonian(Hg, -Delta*np.eye(He.shape[0])+He, Bgq, Beq, dijq, mass=mass)
 
 def return_lasers(delta, s, pol):
     pol_coord = 'spherical' if (pol[0][2]>0 or pol[0][1]>0) else 'cartesian'
-    return pylcp.laserBeams([
+    return pylcp_jax.laserBeams([
         {'kvec': np.array([0., 0.,  1.]), 'pol': pol[0], 'pol_coord': pol_coord, 'delta': delta, 's': s},
         {'kvec': np.array([0., 0., -1.]), 'pol': pol[1], 'pol_coord': pol_coord, 'delta': delta, 's': s},
-    ], beam_type=pylcp.infinitePlaneWaveBeam)
+    ], beam_type=pylcp_jax.infinitePlaneWaveBeam)
 
-magField = pylcp.constantMagneticField(np.array([0., 0., 0.]))
+magField = pylcp_jax.constantMagneticField(np.array([0., 0., 0.]))
 pols = {
     'sig+sig-': [np.array([0., 0., 1.]), np.array([1., 0., 0.])],
     'sig+sig+': [np.array([0., 0., 1.]), np.array([0., 0., 1.])],
@@ -39,7 +39,7 @@ for key, pol in list(pols.items())[:1]:  # profile just the first key
     hamiltonian = return_hamiltonian(2, det)
     print(f"{hamiltonian.n} states")
 
-    o = pylcp.obe(laserBeams, magField, hamiltonian, transform_into_re_im=True)
+    o = pylcp_jax.obe(laserBeams, magField, hamiltonian, transform_into_re_im=True)
 
     # Phase 1: rateeq construction (first set_initial_rho_from_rateeq)
     t0 = time.perf_counter()

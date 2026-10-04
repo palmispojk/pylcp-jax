@@ -22,8 +22,8 @@ import numpy as np
 import jax
 import jax.numpy as jnp
 
-import pylcp
-from pylcp.integration_tools_gpu import (
+import pylcp_jax
+from pylcp_jax.integration_tools_gpu import (
     _bytes_per_atom, _gpu_device_info, optimal_batch_size,
 )
 
@@ -51,18 +51,18 @@ def gpu_memory_info():
 
 
 def build_obe(Fg, Fe, gFg, gFe):
-    Hg, Bgq = pylcp.hamiltonians.singleF(F=Fg, gF=gFg, muB=1)
-    He, Beq = pylcp.hamiltonians.singleF(F=Fe, gF=gFe, muB=1)
-    dijq = pylcp.hamiltonians.dqij_two_bare_hyperfine(Fg, Fe)
+    Hg, Bgq = pylcp_jax.hamiltonians.singleF(F=Fg, gF=gFg, muB=1)
+    He, Beq = pylcp_jax.hamiltonians.singleF(F=Fe, gF=gFe, muB=1)
+    dijq = pylcp_jax.hamiltonians.dqij_two_bare_hyperfine(Fg, Fe)
     det = -2.5
-    hamiltonian = pylcp.hamiltonian(
+    hamiltonian = pylcp_jax.hamiltonian(
         Hg, -det * np.eye(2 * Fe + 1) + He, Bgq, Beq, dijq, mass=100
     )
-    laserBeams = pylcp.conventional3DMOTBeams(
-        s=1.25, delta=0., beam_type=pylcp.infinitePlaneWaveBeam
+    laserBeams = pylcp_jax.conventional3DMOTBeams(
+        s=1.25, delta=0., beam_type=pylcp_jax.infinitePlaneWaveBeam
     )
-    magField = pylcp.quadrupoleMagneticField(1e-4)
-    return pylcp.obe(laserBeams, magField, hamiltonian,
+    magField = pylcp_jax.quadrupoleMagneticField(1e-4)
+    return pylcp_jax.obe(laserBeams, magField, hamiltonian,
                      transform_into_re_im=True), hamiltonian
 
 

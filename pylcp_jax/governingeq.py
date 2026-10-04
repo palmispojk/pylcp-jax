@@ -1,5 +1,5 @@
 """
-Base class for all governing equations in pylcp.
+Base class for all governing equations in pylcp_jax.
 
 Defines the common interface (initial conditions, force profiles, equilibrium
 finding, trapping frequencies, damping coefficients) shared by the heuristic
@@ -26,29 +26,29 @@ class governingeq(object):
     """
     Governing equation base class.
 
-    This class is the basis for making all the governing equations in `pylcp`,
+    This class is the basis for making all the governing equations in `pylcp_jax`,
     including the rate equations, heuristic equation, and the optical Bloch
     equations.  Its methods are available to other governing equations.
 
     Parameters
     ----------
-    laserBeams : dictionary of pylcp.laserBeams, pylcp.laserBeams, or list of pylcp.laserBeam
+    laserBeams : dictionary of pylcp_jax.laserBeams, pylcp_jax.laserBeams, or list of pylcp_jax.laserBeam
         The laserBeams that will be used in constructing the optical Bloch
         equations, addressing transitions in the block diagonal hamiltonian.  It can
         be any of the following:
 
-            * A dictionary of pylcp.laserBeams: if this is the case, the keys of
+            * A dictionary of pylcp_jax.laserBeams: if this is the case, the keys of
               the dictionary should match available :math:`d^{nm}` matrices
-              in the pylcp.hamiltonian object.  The key structure should be
+              in the pylcp_jax.hamiltonian object.  The key structure should be
               `n->m`.
-            * pylcp.laserBeams: a single set of laser beams is assumed to
+            * pylcp_jax.laserBeams: a single set of laser beams is assumed to
               address the transition `g->e`.
-            * a list of pylcp.laserBeam: automatically promoted to a
-              pylcp.laserBeams object assumed to address the transition `g->e`.
+            * a list of pylcp_jax.laserBeam: automatically promoted to a
+              pylcp_jax.laserBeams object assumed to address the transition `g->e`.
 
-    magField : pylcp.magField or callable
+    magField : pylcp_jax.magField or callable
         The function or object that defines the magnetic field.
-    hamiltonian : pylcp.hamiltonian or None
+    hamiltonian : pylcp_jax.hamiltonian or None
         The internal hamiltonian of the particle.
     a : array_like, shape (3,), optional
         A default acceleration to apply to the particle's motion, usually
@@ -223,7 +223,7 @@ class governingeq(object):
 
         Returns
         -------
-        profile : pylcp.common.base_force_profile
+        profile : pylcp_jax.common.base_force_profile
             Resulting force profile.
         """
         pass

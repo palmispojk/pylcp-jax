@@ -1,13 +1,13 @@
 """
-Tests for pylcp/governingeq.py
+Tests for pylcp_jax/governingeq.py
 """
 
 import jax.numpy as jnp
 import numpy as np
 import pytest
 
-from pylcp.fields import constantMagneticField, laserBeam, laserBeams
-from pylcp.governingeq import governingeq
+from pylcp_jax.fields import constantMagneticField, laserBeam, laserBeams
+from pylcp_jax.governingeq import governingeq
 
 # ---------------------------------------------------------------------------
 # Minimal concrete subclasses

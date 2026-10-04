@@ -22,7 +22,7 @@ import jax
 import jax.numpy as jnp
 import pickle
 
-import pylcp
+import pylcp_jax
 import constants
 
 # ---------------------------------------------------------------------------
@@ -31,30 +31,30 @@ import constants
 print("Building blue MOT setup...")
 trap_time = time.monotonic()
 
-laserBeams = pylcp.laserBeams()
+laserBeams = pylcp_jax.laserBeams()
 for kvec in ([1., 0., 0.], [-1., 0., 0.], [0., 1., 0.], [0., -1., 0.]):
-    laserBeams.add_laser(pylcp.infinitePlaneWaveBeam(
+    laserBeams.add_laser(pylcp_jax.infinitePlaneWaveBeam(
         kvec=constants.kmag * np.array(kvec), pol=-1,
         s=constants.s, delta=0.,
     ))
 for kvec in ([0., 0., 1.], [0., 0., -1.]):
-    laserBeams.add_laser(pylcp.infinitePlaneWaveBeam(
+    laserBeams.add_laser(pylcp_jax.infinitePlaneWaveBeam(
         kvec=constants.kmag * np.array(kvec), pol=+1,
         s=constants.s_z, delta=0.,
     ))
-magField = pylcp.quadrupoleMagneticField(constants.alpha_nat)
+magField = pylcp_jax.quadrupoleMagneticField(constants.alpha_nat)
 
 # Sr88 1S0 (J=0) -> 1P1 (J=1):  F=0 ground, F=1 excited
-H_g, muq_g = pylcp.hamiltonians.singleF(F=0, gF=0, muB=constants.muB)
-H_e, muq_e = pylcp.hamiltonians.singleF(F=1, gF=1, muB=constants.muB)
-d_q = pylcp.hamiltonians.dqij_two_bare_hyperfine(0, 1)
+H_g, muq_g = pylcp_jax.hamiltonians.singleF(F=0, gF=0, muB=constants.muB)
+H_e, muq_e = pylcp_jax.hamiltonians.singleF(F=1, gF=1, muB=constants.muB)
+d_q = pylcp_jax.hamiltonians.dqij_two_bare_hyperfine(0, 1)
 
-hamiltonian = pylcp.hamiltonian(
+hamiltonian = pylcp_jax.hamiltonian(
     H_g, -constants.det * np.eye(3) + H_e, muq_g, muq_e, d_q,
     mass=constants.mass, muB=constants.muB, gamma=constants.gamma, k=constants.kmag
 )
 
-obe = pylcp.obe(laserBeams, magField, hamiltonian, a=constants.a_grav, transform_into_re_im=True)
+obe = pylcp_jax.obe(laserBeams, magField, hamiltonian, a=constants.a_grav, transform_into_re_im=True)
 
 # ---------------------------------------------------------------------------
 # Build batched initial conditions — Zeeman slower beam

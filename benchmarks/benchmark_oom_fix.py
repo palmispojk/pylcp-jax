@@ -7,7 +7,7 @@ diffrax solver for every unique max_steps value.
 import time
 import os
 import numpy as np
-import pylcp
+import pylcp_jax
 
 
 def get_rss_mb():
@@ -23,23 +23,23 @@ det = -2.5
 s = 1.0
 
 # Same laser beams as the notebook (just sigma+sigma- for benchmark)
-laserBeams = pylcp.laserBeams([
+laserBeams = pylcp_jax.laserBeams([
     {'kvec': np.array([0., 0., 1.]), 'pol': np.array([0., 0., 1.]),
      'pol_coord': 'spherical', 'delta': 0, 's': s},
     {'kvec': np.array([0., 0., -1.]), 'pol': np.array([1., 0., 0.]),
      'pol_coord': 'spherical', 'delta': 0, 's': s},
-], beam_type=pylcp.infinitePlaneWaveBeam)
+], beam_type=pylcp_jax.infinitePlaneWaveBeam)
 
 # F=1 -> F=2 hamiltonian
 Fg, Fe = 1, 2
-Hg, Bgq = pylcp.hamiltonians.singleF(F=Fg, gF=0, muB=1)
-He, Beq = pylcp.hamiltonians.singleF(F=Fe, gF=1/Fe, muB=1)
-dijq = pylcp.hamiltonians.dqij_two_bare_hyperfine(Fg, Fe)
-hamiltonian = pylcp.hamiltonian(
+Hg, Bgq = pylcp_jax.hamiltonians.singleF(F=Fg, gF=0, muB=1)
+He, Beq = pylcp_jax.hamiltonians.singleF(F=Fe, gF=1/Fe, muB=1)
+dijq = pylcp_jax.hamiltonians.dqij_two_bare_hyperfine(Fg, Fe)
+hamiltonian = pylcp_jax.hamiltonian(
     Hg, He - det * np.eye(2 * Fe + 1), Bgq, Beq, dijq
 )
 
-magField = pylcp.constantMagneticField(np.zeros((3,)))
+magField = pylcp_jax.constantMagneticField(np.zeros((3,)))
 
 # Same velocity grid as the notebook — creates ~150 unique groups
 v = np.concatenate((np.arange(0.0, 0.1, 0.001),
@@ -50,7 +50,7 @@ print(f"Hamiltonian size: {hamiltonian.n} states")
 print(f"Initial RSS: {get_rss_mb():.0f} MB")
 print()
 
-obj = pylcp.obe(laserBeams, magField, hamiltonian, transform_into_re_im=True)
+obj = pylcp_jax.obe(laserBeams, magField, hamiltonian, transform_into_re_im=True)
 
 t0 = time.perf_counter()
 obj.generate_force_profile(

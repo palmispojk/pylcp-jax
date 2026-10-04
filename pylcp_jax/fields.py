@@ -1,5 +1,5 @@
 """
-Magnetic field and laser beam classes for pylcp.
+Magnetic field and laser beam classes for pylcp_jax.
 
 Provides classes for defining magnetic fields (constant, quadrupole,
 Ioffe-Pritchard) and laser beams (plane wave, Gaussian, clipped Gaussian)
@@ -18,7 +18,7 @@ import numpy as np
 import numpy.typing as npt
 from scipy.spatial.transform import Rotation
 
-from pylcp.common import cart2spherical, spherical2cart
+from pylcp_jax.common import cart2spherical, spherical2cart
 
 
 def return_constant_val(R: npt.ArrayLike, t: float, val: Any) -> Any:
@@ -161,7 +161,7 @@ class magField(object):
     Base magnetic field class.
 
     Stores a magnetic field and calculates useful derivatives
-    for `pylcp`.
+    for `pylcp_jax`.
 
     Parameters
     ----------
@@ -1573,7 +1573,7 @@ class conventional3DMOTBeams(laserBeams):
         List of angles to define a rotated MOT.  Default: [0., 0., 0.]
     rotation_spec : str
         String to define the convention of the Euler rotations.  Default: 'ZYZ'
-    beam_type : pylcp.laserBeam or subclass
+    beam_type : pylcp_jax.laserBeam or subclass
         Type of beam to generate.
     **kwargs :
         other keyword arguments to pass to beam_type

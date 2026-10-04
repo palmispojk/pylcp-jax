@@ -57,19 +57,19 @@ GPU_PEAK_BW_GBS = 1555.0          # A100 HBM2e peak bandwidth
 
 def setup_obe(Fg=0, Fe=1, gFg=0, gFe=1):
     """Build the OBE object for a given (Fg -> Fe) transition."""
-    import pylcp
-    Hg, Bgq = pylcp.hamiltonians.singleF(F=Fg, gF=gFg, muB=1)
-    He, Beq = pylcp.hamiltonians.singleF(F=Fe, gF=gFe, muB=1)
-    dijq = pylcp.hamiltonians.dqij_two_bare_hyperfine(Fg, Fe)
+    import pylcp_jax
+    Hg, Bgq = pylcp_jax.hamiltonians.singleF(F=Fg, gF=gFg, muB=1)
+    He, Beq = pylcp_jax.hamiltonians.singleF(F=Fe, gF=gFe, muB=1)
+    dijq = pylcp_jax.hamiltonians.dqij_two_bare_hyperfine(Fg, Fe)
     ne = int(round(2 * Fe + 1))
-    hamiltonian = pylcp.hamiltonian(
+    hamiltonian = pylcp_jax.hamiltonian(
         Hg, -DET * np.eye(ne) + He, Bgq, Beq, dijq, mass=100
     )
-    laserBeams = pylcp.conventional3DMOTBeams(
-        s=S, delta=0., beam_type=pylcp.infinitePlaneWaveBeam
+    laserBeams = pylcp_jax.conventional3DMOTBeams(
+        s=S, delta=0., beam_type=pylcp_jax.infinitePlaneWaveBeam
     )
-    magField = pylcp.quadrupoleMagneticField(ALPHA)
-    obe = pylcp.obe(laserBeams, magField, hamiltonian, transform_into_re_im=True)
+    magField = pylcp_jax.quadrupoleMagneticField(ALPHA)
+    obe = pylcp_jax.obe(laserBeams, magField, hamiltonian, transform_into_re_im=True)
     obe.set_initial_rho_equally()
     return obe
 
@@ -117,7 +117,7 @@ def fit_amdahl_p(t_per_atom_serial, parallel_results):
 # ---------------------------------------------------------------------------
 def _parallel_worker(y0_batch_np):
     import numpy as _np
-    import pylcp as _pylcp
+    import pylcp_jax as _pylcp
     import jax.numpy as _jnp
 
     Fg = float(os.environ.get('_PYLCP_BENCH_FG', '0'))
@@ -177,7 +177,7 @@ def run_parallel(y0_list, n_cores, t_factor, transition=(0, 1, 0, 1)):
         '_PYLCP_BENCH_GFE': str(gFe),
     }
     # Spawned children re-exec Python and re-import this module, where the
-    # _PYLCP_BENCH_WORKER guard pins JAX to CPU before pylcp is imported.
+    # _PYLCP_BENCH_WORKER guard pins JAX to CPU before pylcp_jax is imported.
     os.environ.update(env)
     ctx = mp.get_context('spawn')
     try:

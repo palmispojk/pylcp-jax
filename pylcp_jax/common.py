@@ -1,5 +1,5 @@
 """
-Common utilities shared across the pylcp package.
+Common utilities shared across the pylcp_jax package.
 
 Includes coordinate-basis conversions (Cartesian <-> spherical), a terminal
 progress bar, a random unit-vector generator, and the base force-profile
@@ -197,7 +197,7 @@ class base_force_profile:
         The forces due to each laser, indexed by the
         manifold the laser addresses.  The dictionary is keyed by the transition
         driven, and individual lasers are in the same order as in the
-        pylcp.laserBeams object used to create the governing equation.
+        pylcp_jax.laserBeams object used to create the governing equation.
     Neq : jnp.Array
         Equilibrium population found.
     """
