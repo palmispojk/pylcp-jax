@@ -29,7 +29,7 @@ class heuristiceq(governingeq):
 
     Parameters
     ----------
-    laserBeams : dictionary of pylcp_jax.laserBeams, pylcp_jax.laserBeams, or list of pylcp_jax.laserBeam
+    laserBeams : dict of pylcp_jax.laserBeams, pylcp_jax.laserBeams, or list of pylcp_jax.laserBeam
         The laserBeams that will be used in constructing the heuristic
         equations.  Must contain only a single key of ``'g->e'``.
     magField : pylcp_jax.magField or callable

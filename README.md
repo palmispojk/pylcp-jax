@@ -69,27 +69,36 @@ Computer Physics Communications 270, 108166 (2022).
 
 ## Installation
 
-Requires Python >= 3.11. Install from a clone with [uv](https://docs.astral.sh/uv/):
+Requires Python >= 3.11 (tested on 3.11 to 3.14).
 
+From PyPI:
 ```
-git clone https://github.com/palmispojk/pylcp-jax/
-cd pylcp-jax
-uv sync
+pip install pylcp-jax
 ```
+The package is installed as `pylcp-jax` and imported as `pylcp_jax`.
 
 For a CUDA-capable GPU (CUDA 12):
 ```
-uv sync --extra cuda
+pip install "pylcp-jax[cuda]"
 ```
 
-For development (tests, linting) and for building the docs / running the
-notebooks:
-```
-uv sync --group dev --group docs
-```
+Optional extras: `plot` (matplotlib, for the built-in plotting helpers) and
+`gratings` (numba, only needed for `pylcp_jax.gratings`), e.g.
+`pip install "pylcp-jax[cuda,plot]"`.
 
-Check that JAX sees your GPU with `uv run python -c "import jax; print(jax.devices())"`.
+Check that JAX sees your GPU with `python -c "import jax; print(jax.devices())"`.
 Without a GPU everything still runs, on the CPU.
+
+### From source
+
+To develop, run the simulations or build the docs, install from a clone with
+[uv](https://docs.astral.sh/uv/):
+```
+git clone https://github.com/palmispojk/pylcp-jax/
+cd pylcp-jax
+uv sync                          # add --extra cuda for a GPU
+uv sync --group dev --group docs # tests, linting, docs and notebooks
+```
 
 ## Quick start
 

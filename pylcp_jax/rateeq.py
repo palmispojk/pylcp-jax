@@ -124,7 +124,7 @@ class rateeq(governingeq):
 
     Parameters
     ----------
-    laserBeams : dictionary of pylcp_jax.laserBeams, pylcp_jax.laserBeams, or list of pylcp_jax.laserBeam
+    laserBeams : dict of pylcp_jax.laserBeams, pylcp_jax.laserBeams, or list of pylcp_jax.laserBeam
         The laserBeams that will be used in constructing the optical Bloch
         equations, addressing transitions in the block diagonal hamiltonian.  It can
         be any of the following:
